@@ -1,0 +1,97 @@
+@font-face {
+	font-family: 'pixel';
+	src: url('PixelifySans-VariableFont_wght.ttf');
+	font-style: normal;
+}
+
+body {
+	display: flex;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	justify-content: center;
+	align-items: center;
+	background-color: #fdf5e2;
+	font-family: "pixel", sans-serif;
+}
+
+.container {
+	background: #FD7096;
+	padding: 40px;
+	display: grid;
+	grid-template-rows: 1fr 3fr 1fr;
+
+	box-shadow:
+		0 0 0 4px #000,
+		5px 0 0 4px #000,
+		-5px 0 0 4px #000,
+		0 5px 0 4px #000,
+		0 -5px 0 4px #000;
+
+	image-rendering: pixelated;
+}
+
+.question {
+	font-size: 50px;
+	color: white;
+	text-shadow: 2px 2px 2px black;
+}
+
+.options {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+button {
+	--color: #ffffff;
+	--bg-color: #A9331B;
+	color: var(--color);
+	background-color: var(--bg-color);
+	padding: 15px 40px 15px 40px;
+	margin: 10px;
+	font-size: 20px;
+	font-family: "Courier New", monospace;
+	shape-rendering: crispEdges;
+	border: 0;
+	box-shadow:
+		0px 5px black,
+		0px -5px black,
+		5px 0px black,
+		-5px 0px black,
+		0px 10px #00000038,
+		5px 5px #00000038,
+		-5px 5px #00000038,
+		inset 0px 5px #ffffff36;
+	cursor: pointer;
+}
+
+button:active {
+	transform: translateY(5px);
+	box-shadow:
+		0px 5px black,
+		0px -5px black,
+		5px 0px black,
+		-5px 0px black,
+		inset 0px 5px #00000038;
+}
+
+.neko-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#neko {
+	width: 32px;
+	height: 32px;
+
+	transform: scale(4);
+
+	background-image: url("oneko.gif");
+
+	background-repeat: no-repeat;
+
+	image-rendering: pixelated;
+	z-index: 999999;
+	cursor: pointer;
+}
