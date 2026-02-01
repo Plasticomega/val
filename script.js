@@ -2,6 +2,9 @@
 // ===== elements =====
 const neko = document.getElementById("neko");
 const noBtn = document.querySelector(".no-btn");
+const yesBtn = document.querySelector(".yes-btn")
+const question = document.querySelector(".question")
+
 
 // ===== sprite sheet =====
 const TILE = 32;
@@ -22,7 +25,7 @@ const SPRITES = {
 
 // ===== state =====
 let mode = "idle";
-// idle | goButton | scratch | return
+// idle | goButton | scratch | return | dance
 
 let x = 0, y = 0;
 let homeX = 0, homeY = 0;
@@ -82,6 +85,23 @@ function animateIdle(ts) {
 		setSprite(SPRITES.scratchSelf[idleFrame]);
 }
 
+
+yesBtn.addEventListener("click", () => {
+	mode = "dance";
+
+	question.textContent = "Lets goo";
+
+	yesBtn.style.display = "none";
+	noBtn.style.display = "none";
+
+	neko.style.backgroundImage = "url(catdance.gif)";
+	neko.style.backgroundRepeat = "no-repeat";
+	neko.style.backgroundPosition = "center";
+	neko.style.backgroundSize = "contain";
+	neko.style.transform = "scale(10)"
+});
+
+
 // ===== helpers =====
 function setSprite([c, r]) {
 	neko.style.backgroundPosition =
@@ -133,6 +153,9 @@ function moveToward() {
 // ===== main loop =====
 function tick(ts) {
 
+	if (mode === "dance") {
+		return requestAnimationFrame(tick);
+	}
 	if (mode === "idle") {
 		animateIdle(ts)
 	}
@@ -141,7 +164,8 @@ function tick(ts) {
 		if (moveToward()) {
 			mode = "scratch";
 			setTimeout(() => {
-				noBtn.classList.add("destroyed");
+				noBtn.classList.add("scratched");
+				noBtn.textContent = "No 💀";
 				tx = homeX;
 				ty = homeY;
 				mode = "return";

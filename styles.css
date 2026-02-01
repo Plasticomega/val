@@ -4,22 +4,30 @@
 	font-style: normal;
 }
 
+
 body {
-	display: flex;
-	height: 100vh;
-	width: 100vw;
+	min-height: 100vh;
 	margin: 0;
+
+	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	background-color: #fdf5e2;
 	font-family: "pixel", sans-serif;
 }
 
+
+
 .container {
 	background: #FD7096;
-	padding: 40px;
+	padding: 32px;
+
 	display: grid;
-	grid-template-rows: 1fr 4fr 1fr;
+	grid-template-rows: auto 1fr auto;
+
+	width: min(90vw, 420px);
+	min-height: 520px;
 
 	box-shadow:
 		0 0 0 4px #000,
@@ -32,12 +40,15 @@ body {
 }
 
 .question {
-	font-size: 50px;
+
+	font-size: clamp(24px, 6vw, 48px);
+	text-align: center;
 	color: white;
 	text-shadow: 2px 2px 2px black;
 }
 
 .options {
+	min-height: 80px;
 	display: flex;
 	justify-content: space-evenly;
 }
@@ -85,8 +96,7 @@ button:active {
 	width: 32px;
 	height: 32px;
 
-	transform: scale(4);
-
+	transform: scale(clamp(2.5, 5vw, 4));
 	background-image: url("oneko.gif");
 
 	background-repeat: no-repeat;
@@ -97,23 +107,53 @@ button:active {
 }
 
 
-@keyframes destroy {
+
+.no-btn.scratched {
+	/* fade but keep color */
+	pointer-events: none;
+	transform: rotate(-6deg) scale(0.95);
+	position: relative;
+}
+
+/* scratch marks */
+.no-btn.scratched::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+
+	background:
+		repeating-linear-gradient(120deg,
+			transparent 0px,
+			transparent 6px,
+			rgba(80, 0, 0, 0.55) 7px,
+			rgba(30, 0, 0, 0.85) 10px);
+
+	mix-blend-mode: multiply;
+	pointer-events: none;
+}
+
+.no-btn.scratched {
+	animation: shake 0.15s linear 4;
+}
+
+@keyframes shake {
 	0% {
-		transform: scale(1) rotate(0deg);
-		opacity: 1;
+		transform: translateX(0) rotate(-6deg);
+	}
+
+	25% {
+		transform: translateX(-2px) rotate(-6deg);
 	}
 
 	50% {
-		transform: scale(1.2) rotate(5deg);
+		transform: translateX(2px) rotate(-6deg);
+	}
+
+	75% {
+		transform: translateX(-2px) rotate(-6deg);
 	}
 
 	100% {
-		transform: scale(0) rotate(-20deg);
-		opacity: 0;
+		transform: translateX(0) rotate(-6deg);
 	}
-}
-
-.destroyed {
-	animation: destroy 0.4s ease forwards;
-	pointer-events: none;
 }
