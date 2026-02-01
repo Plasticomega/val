@@ -4,6 +4,10 @@
 	font-style: normal;
 }
 
+html,
+body {
+	overflow: hidden;
+}
 
 body {
 	min-height: 100vh;
@@ -26,7 +30,7 @@ body {
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 
-	width: min(90vw, 420px);
+	width: 420px;
 	min-height: 520px;
 
 	box-shadow:
@@ -41,7 +45,7 @@ body {
 
 .question {
 
-	font-size: clamp(24px, 6vw, 48px);
+	font-size: clamp(32px, 7vw, 56px);
 	text-align: center;
 	color: white;
 	text-shadow: 2px 2px 2px black;
@@ -155,5 +159,20 @@ button:active {
 
 	100% {
 		transform: translateX(0) rotate(-6deg);
+	}
+}
+
+
+@media (max-width: 480px) {
+	.container {
+		width: 90vw;
+		min-height: 560px;
+		padding: 24px;
+	}
+
+
+	button {
+		font-size: clamp(16px, 4.5vw, 22px);
+		padding: 12px 32px;
 	}
 }
